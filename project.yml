@@ -1,0 +1,50 @@
+name: AdsSample
+options:
+  xcodeVersion: "1530"
+  minimumXcodeGenVersion: "2.39.1"
+  deploymentTarget:
+    iOS: "15.0"
+settingGroups:
+  default:
+    SWIFT_VERSION: 5.10
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: true
+
+targets:
+  AdsSampleApp:
+    platform: iOS
+    type: application
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: "AdsSampleApp"
+        CFBundleName: "AdsSampleApp"
+        CFBundleVersion: '1.0.0'
+        CFBundleShortVersionString: '1.0.0'
+        CFBundleDevelopmentRegion: "fi"
+        UILaunchStoryboardName: LaunchScreen
+        ITSAppUsesNonExemptEncryption: false
+        UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        NSCalendarsUsageDescription: Localized in InfoPlist.strings.
+        NSLocationWhenInUseUsageDescription: Localized in InfoPlist.strings.
+        NSPhotoLibraryUsageDescription:	Localized in InfoPlist.strings.
+        UIUserInterfaceStyle: "Light"
+    scheme: {}
+    sources:
+      - path: App/Sources
+        name: "App: Sources 🚀"
+      - path: App/Resources
+        name: "App: Resources"
+      - path: UI/Sources
+        name: "UI: Sources 📱"
+    dependencies:
+      - package: RichieSDK
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "fi.richie.ads.app"
+      groups:
+        - default
+
+packages:
+  RichieSDK:
+    url: https://github.com/richiefi/richie-sdk-ios.git
+    version: "202402.25.0"
