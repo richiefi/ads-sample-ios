@@ -8,7 +8,11 @@ import UIKit
 // MARK: View controller
 
 final class RootViewController: UIViewController {
-    var dynamicAdsCallback: (() -> Void)?
+    var dynamicAdsCallback: (() -> Void)? {
+        didSet {
+            (self.view as! RootView).dynamicAdsButton.isEnabled = self.dynamicAdsCallback != nil
+        }
+    }
 
     override func loadView() {
         let rootView = RootView()

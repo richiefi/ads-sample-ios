@@ -8,7 +8,6 @@ import RichieSDK
 
 @MainActor
 public class AppCoordinator {
-    private let richieAdsController: RichieAdsController
     private let window: UIWindow
 
     public init(window: UIWindow) {
@@ -20,16 +19,18 @@ public class AppCoordinator {
 
         // Initialize Richie early in your app’s lifecycle;
         // application:didFinishLaunchingWithOptions: is a good candidate.
-        // Contact Richie to get your production app identifier before
-        // submitting an app to the App Store.
-        // Initialize with a backgroundDownloadManager if you want background downloads for ads.
-        self.richieAdsController = RichieAdsController(appIdentifier: "richiedemo")
+        // This example uses the shared singleton; you can also initialize `Richie`
+        // and pass that around as an ordinary value.
+        Richie.initializeShared(appIdentifier: Bundle.main.bundleIdentifier!)
+        Task {
+            let richieAdsController = try await Richie.shared.makeAds()
 
-        rootViewController.dynamicAdsCallback = { [weak self] in
-            guard let self else { return }
-            let dynamicAdsVC = DynamicAdsViewController(richieAdsController: self.richieAdsController)
-            dynamicAdsVC.modalPresentationStyle = .fullScreen
-            self.window.rootViewController?.present(dynamicAdsVC, animated: true)
+            rootViewController.dynamicAdsCallback = { [weak self] in
+                guard let self else { return }
+                let dynamicAdsVC = DynamicAdsViewController(richieAdsController: richieAdsController)
+                dynamicAdsVC.modalPresentationStyle = .fullScreen
+                self.window.rootViewController?.present(dynamicAdsVC, animated: true)
+            }
         }
     }
 }
