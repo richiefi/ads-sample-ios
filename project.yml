@@ -46,5 +46,5 @@ targets:
 
 packages:
   RichieSDK:
-    url: https://github.com/richiefi/richie-sdk-ios.git
-    version: "202402.25.0"
+    url: "https://github.com/richiefi/richiesdk-ios"
+    exactVersion: "202404.11.0"
